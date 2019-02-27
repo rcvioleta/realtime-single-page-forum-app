@@ -3,12 +3,17 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Question extends Model
 {
-    protected $fillable = [
-        'title', 'slug', 'body'
-    ];
+    // protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
+    protected $guarded = [];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function user()
     {
@@ -23,5 +28,10 @@ class Question extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->slug;
     }
 }
