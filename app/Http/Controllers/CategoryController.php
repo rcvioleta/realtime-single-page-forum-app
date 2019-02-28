@@ -9,6 +9,16 @@ use App\Http\Resources\CategoryResource;
 class CategoryController extends Controller
 {
     /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -26,10 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->slug = str_slug($request->name);
-        $category->save();
+        Category::create($request->all());
         return response('New Category added', 201);
     }
 
@@ -53,7 +60,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update([ 'name' => $request->name, 'slug' => str_slug($request->name) ]);
+        $category->update($request->all());
         return response('Updated successfully!', 202);
     }
 

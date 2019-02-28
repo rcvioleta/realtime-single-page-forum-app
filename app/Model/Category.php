@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function setSlugAttribute($value)
+    {
+       $this->attributes['slug'] = str_slug($value);
+    }
 }
