@@ -15,17 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return CategoryResource::collection(Category::latest()->get());
     }
 
     /**
@@ -55,17 +45,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -74,7 +53,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update([ 'name' => $request->name, 'slug' => str_slug($request->name) ]);
         return response('Updated successfully!', 202);
     }
 
