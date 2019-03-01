@@ -51,7 +51,7 @@ class User extends Authenticatable implements JWTSubject
     public function likes()
     {
         return $this->hasMany(Like::class);
-    } 
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function getPasswordAttribute($value)
+    public function setPasswordAttribute($value)
     {
         return $this->attributes['password'] = bcrypt($value);
     }
