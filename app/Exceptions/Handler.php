@@ -17,8 +17,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
-    ];
+        //];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
@@ -52,17 +51,14 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof TokenBlacklistedException) {
             return response(['error' => 'Token cannot be use anymore'], 406);
-        }
-        else if ($exception instanceof TokenInvalidException) {
+        } else if ($exception instanceof TokenInvalidException) {
             return response(['error' => 'Token is invalid'], 406);
-        }
-        else if ($exception instanceof TokenExpiredException) {
+        } else if ($exception instanceof TokenExpiredException) {
             return response(['error' => 'Token already expired'], 406);
-        }
-        else if ($exception instanceof JWTException) {
+        } else if ($exception instanceof JWTException) {
             return response(['error' => 'Token is not provided'], 401);
         }
-        
-        return parent::render($request, $exception);
+
+        // return parent::render($request, $exception);
     }
 }

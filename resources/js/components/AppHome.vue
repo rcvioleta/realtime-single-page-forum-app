@@ -19,8 +19,7 @@ export default {
 </script>
 
 <style>
-.theme--light.v-toolbar a,
-.layout a {
+a {
   text-decoration: none;
 }
 
