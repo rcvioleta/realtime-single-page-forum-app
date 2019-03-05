@@ -11,7 +11,7 @@
         <v-btn class="signup" flat>Signup</v-btn>
       </router-link>
     </v-form>
-    <progress-bar v-show="!loading"></progress-bar>
+    <progress-bar :errMsg="message" v-show="!loading"></progress-bar>
   </v-container>
 </template>
 
@@ -27,7 +27,8 @@ export default {
         email: null,
         password: null
       },
-      loading: true
+      loading: true,
+      message: "Just a sec... We are logging you in"
     };
   },
   components: {

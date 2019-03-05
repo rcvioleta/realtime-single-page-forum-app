@@ -1,3 +1,5 @@
+import Token from './Token';
+
 class AppStorage {
     setToken(token) {
         localStorage.setItem('token', token);
@@ -10,6 +12,15 @@ class AppStorage {
     store(token, user) {
         this.setToken(token);
         this.setUser(user);
+    }
+
+    storeToken(response) {
+        const access_token = response.data.access_token;
+        const username = response.data.user;
+        if (Token.isValid(access_token)) {
+            this.store(access_token, username);
+            console.log("Logged in!");
+        }
     }
 
     clear() {

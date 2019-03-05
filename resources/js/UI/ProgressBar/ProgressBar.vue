@@ -2,7 +2,7 @@
   <div>
     <app-backdrop></app-backdrop>
     <div class="progress-wrapper">
-      <h3>Just a sec... We are logging you in.</h3>
+      <h3>{{ errMsg }}</h3>
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
   </div>
@@ -12,6 +12,7 @@
 import Backdrop from "../Backdrop/Backdrop";
 
 export default {
+  props: ["errMsg"],
   components: {
     "app-backdrop": Backdrop
   }
@@ -25,6 +26,7 @@ export default {
   padding: 5rem;
   box-shadow: 0 0 15px #ccc;
   border-radius: 5px;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 300;

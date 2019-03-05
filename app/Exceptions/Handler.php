@@ -16,11 +16,9 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
-        //];
-
+    protected $dontReport = [];
     /**
-     * A list of the inputs that are never flashed for validation exceptions.
+     * A list of the inputs that are never flashed for validation exceptions
      *
      * @var array
      */
@@ -59,6 +57,6 @@ class Handler extends ExceptionHandler
             return response(['error' => 'Token is not provided'], 401);
         }
 
-        // return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
 }
