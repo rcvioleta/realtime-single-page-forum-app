@@ -1943,6 +1943,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1953,6 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         password: null
       },
+      errors: {},
       loading: true,
       message: "Just a sec... We are logging you in"
     };
@@ -1969,12 +1980,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.storeToken(resp);
 
         _this.setLoading();
+
+        _this.reset();
       }).catch(function (err) {
-        console.log("error", err.response.data);
+        console.log("error", err.response.data); // this.errors = err.response.data.errors;
 
         _this.setLoading();
       });
-      this.reset();
     },
     storeToken: function storeToken(response) {
       var access_token = response.data.access_token;
@@ -6662,7 +6674,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.signup[data-v-74b91af0] {\r\n  background-color: orange;\n}\n.signup a[data-v-74b91af0] {\r\n  color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.signup[data-v-74b91af0] {\r\n  background-color: orange;\n}\n.signup a[data-v-74b91af0] {\r\n  color: #fff;\n}\n.text--danger[data-v-74b91af0] {\r\n  color: #e74c3c;\r\n  margin: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -38287,6 +38299,16 @@ var render = function() {
             }
           }),
           _vm._v(" "),
+          _vm.errors.email
+            ? _vm._l(_vm.errors.email, function(error) {
+                return _c("ul", { key: error }, [
+                  _c("li", { staticClass: "text--danger" }, [
+                    _vm._v(_vm._s(error))
+                  ])
+                ])
+              })
+            : _vm._e(),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: { label: "Password", type: "password" },
             model: {
@@ -38297,6 +38319,16 @@ var render = function() {
               expression: "form.password"
             }
           }),
+          _vm._v(" "),
+          _vm.errors.password
+            ? _vm._l(_vm.errors.password, function(error) {
+                return _c("ul", { key: error }, [
+                  _c("li", { staticClass: "text--danger" }, [
+                    _vm._v(_vm._s(error))
+                  ])
+                ])
+              })
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-btn",
@@ -38315,7 +38347,7 @@ var render = function() {
             1
           )
         ],
-        1
+        2
       ),
       _vm._v(" "),
       _c("progress-bar", {

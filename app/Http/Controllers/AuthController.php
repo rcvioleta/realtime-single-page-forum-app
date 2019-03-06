@@ -27,11 +27,16 @@ class AuthController extends Controller
      */
     public function login()
     {
+        $this->validate(request(), [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
         $credentials = request(['email', 'password']);
 
         try {
             if (!$token = auth()->attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['errors' => 'Unauthorized'], 401);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'Could not create token'], 500);

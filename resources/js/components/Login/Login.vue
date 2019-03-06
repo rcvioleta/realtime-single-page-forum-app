@@ -2,8 +2,18 @@
   <v-container>
     <v-form ref="form">
       <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
+      <template v-if="errors.email">
+        <ul v-for="error in errors.email" :key="error">
+          <li class="text--danger">{{ error }}</li>
+        </ul>
+      </template>
 
       <v-text-field v-model="form.password" label="Password" type="password"></v-text-field>
+      <template v-if="errors.password">
+        <ul v-for="error in errors.password" :key="error">
+          <li class="text--danger">{{ error }}</li>
+        </ul>
+      </template>
 
       <v-btn color="success" @click="login">Login</v-btn>
 
@@ -27,6 +37,7 @@ export default {
         email: null,
         password: null
       },
+      errors: {},
       loading: true,
       message: "Just a sec... We are logging you in"
     };
@@ -43,12 +54,13 @@ export default {
         .then(resp => {
           this.storeToken(resp);
           this.setLoading();
+          this.reset();
         })
         .catch(err => {
           console.log("error", err.response.data);
+          // this.errors = err.response.data.errors;
           this.setLoading();
         });
-      this.reset();
     },
     storeToken(response) {
       const access_token = response.data.access_token;
@@ -88,5 +100,10 @@ export default {
 
 .signup a {
   color: #fff;
+}
+
+.text--danger {
+  color: #e74c3c;
+  margin: 0;
 }
 </style>
